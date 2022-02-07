@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe
+from .models import Recipe, RecipeIngredient
 
 class RecipeSerializer(serializers.HyperlinkedModelSerializer):
     recipe_ingredients = serializers.HyperlinkedRelatedField(
@@ -23,5 +23,5 @@ class RecipeIngredientSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     class Meta:
-        model = Recipe
+        model = RecipeIngredient
         fields = ('id', 'name', 'quantity', 'unit', 'recipe', 'recipe_id')
