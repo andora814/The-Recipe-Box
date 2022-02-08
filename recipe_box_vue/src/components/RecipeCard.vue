@@ -2,15 +2,15 @@
   <div class="recipe_container">
     <div class="container">
       <div> {{ recipe.title }} </div>
-      <!-- <img :src="image_card.img" alt="picture" :class="picclass" @mouseover="mouseon" @mouseleave="mouseoff"/> -->
+      <img :src="recipe.image" alt="recipe picture" :class="picclass" @mouseover="mouseon" @mouseleave="mouseoff"/>
       <!-- <div v-if="showName" class="center" >{{ image_card.title }}</div> -->
     </div>
-    <!-- <div @click="deleteImage" class="delBtn">x</div> -->
+    <div @click="deleteRecipe" class="delBtn">x</div>
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   name: 'RecipeCard',
   data: () => ({
@@ -21,15 +21,15 @@ export default {
     recipe: Object
   },
   methods: {
-    // async deleteImage() {
-    //     await axios.delete(`http://localhost:8000/images/${this.image_card.id}`, {
-    //       auth: {
-    //         username: 'picmeuser',
-    //         password: 'picme'
-    //       }
-    //     })
-    //     this.$emit('handleDelete', this.image_card.id)
-    },
+    async deleteRecipe() {
+        await axios.delete(`http://localhost:8000/recipes/${this.recipe.id}`, {
+          auth: {
+            username: 'recipeboxuser',
+            password: 'recipe'
+          }
+        })
+        this.$emit('handleDelete', this.recipe.id)
+    }
     // mouseon () {
     //   this.showName = true
     //   this.picclass = 'blur'
@@ -39,6 +39,7 @@ export default {
     //   this.picclass = 'normal'
     // }
   // }
+}
 }
 </script>
 
@@ -69,7 +70,7 @@ img {
 }
 
 .blur {
- opacity: 0.6;
+  opacity: 0.6;
 }
 
 .image_card_container {
@@ -79,7 +80,7 @@ img {
 
 .delBtn {
   width: 100%;
-  background-color: #80cbc4;
+  background-color: green;
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
@@ -87,7 +88,7 @@ img {
 }
 
 .delBtn:hover {
-  background-color: #682424;
+  background-color: red;
   color: white
 }
 
