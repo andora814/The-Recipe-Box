@@ -9,6 +9,9 @@
                     <input placeholder="# of Servings" name="servings" type="servings" v-on:input="handleFormChange"/>
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange"/>
                     <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange"/>
+                    <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange"/>
+                    <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange"/>
+                    <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange"/>
                     <input placeholder="Step #" name="number" type="number" v-on:input="handleFormChange"/>
                     <input placeholder="Instructions" name="step" type="step" v-on:input="handleFormChange"/>
                     <input placeholder="Source" name="source" type="source" v-on:input="handleFormChange"/>
@@ -33,7 +36,9 @@ export default {
         source: '',
         number: 0,
         step: '',
-        new_recipe: {}
+        new_recipe: {},
+        quantity: 0,
+        unit: ''
     }),
     methods: {
         handleFormChange(e) {
@@ -56,11 +61,10 @@ export default {
                 }
             })
             this.$router.push(`/recipes/${recipe_response.data.id}`)
-            console.log(recipe_response.data)
             this.new_recipe=recipe_response.data
-            const instruction_response = await axios.post(`http://localhost:8000/instructions/`, {
+            await axios.post(`http://localhost:8000/instructions/`, {
                 "recipe_id": this.new_recipe.id,
-                "name": "test name string",
+                "name": "test name string for instruction",
                 "number": this.number,
                 "step": this.step,
             }, {
@@ -69,7 +73,18 @@ export default {
                     password: 'recipe'
                 }
             })
-            console.log(instruction_response)
+            await axios.post(`http://localhost:8000/recipeingredients/`, {
+                "recipe_id": this.new_recipe.id,
+                "ingredient_id": 4,
+                "name": "test name string for recipe ingredient",
+                "quantity": this.quantity,
+                "unit": this.unit,
+            }, {
+                auth: {
+                    username: 'recipeboxuser',
+                    password: 'recipe'
+                }
+            })
         }
     }
 }
