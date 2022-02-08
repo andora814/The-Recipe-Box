@@ -22,7 +22,6 @@ export default {
     },
     methods: {
         async getRecipes() {
-            console.log("mounted function is working")
             const res = await axios.get(`http://localhost:8000/recipes`)
             console.log(res.data)
             this.recipe_array = res.data
@@ -35,6 +34,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

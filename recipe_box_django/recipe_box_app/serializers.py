@@ -7,12 +7,17 @@ class RecipeSerializer(serializers.HyperlinkedModelSerializer):
         many=True,
         read_only=True
     )
+    instructions = serializers.HyperlinkedRelatedField(
+        view_name='instruction_detail',
+        many=True,
+        read_only=True
+    )
 
     recipe_url = serializers.ModelSerializer.serializer_url_field(view_name='recipe_detail')
 
     class Meta:
         model = Recipe
-        fields = ('id', 'recipe_url', 'title', 'ready_in_minutes', 'servings', 'source_url', 'image', 'summary', 'source', 'recipe_ingredients',)
+        fields = ('id', 'recipe_url', 'title', 'ready_in_minutes', 'servings', 'source_url', 'image', 'summary', 'source', 'recipe_ingredients', 'instructions')
 
 class RecipeIngredientSerializer(serializers.HyperlinkedModelSerializer):
     recipe = serializers.HyperlinkedRelatedField(
