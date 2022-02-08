@@ -19,15 +19,23 @@ class RecipeIngredientSerializer(serializers.HyperlinkedModelSerializer):
         view_name='recipe_detail',
         read_only=True
     )
+    ingredient = serializers.HyperlinkedRelatedField(
+        view_name='ingredient_detail',
+        read_only=True
+    )
     recipe_id = serializers.PrimaryKeyRelatedField(
         queryset=Recipe.objects.all(),
         source='recipe'
     )
+    ingredient_id = serializers.PrimaryKeyRelatedField(
+        queryset=Ingredient.objects.all(),
+        source='ingredient'
+    )
     recipe_ingredient_url = serializers.ModelSerializer.serializer_url_field(view_name='recipe_ingredient_detail')
-
+    ingredient_url = serializers.ModelSerializer.serializer_url_field(view_name='ingredient_detail')
     class Meta:
         model = RecipeIngredient
-        fields = ('id', 'recipe_ingredient_url', 'name', 'quantity', 'unit', 'recipe', 'recipe_id')
+        fields = ('id', 'recipe_ingredient_url', 'ingredient_url', 'name', 'quantity', 'unit', 'recipe', 'recipe_id', 'ingredient', 'ingredient_id')
 
 
 class IngredientSerializer(serializers.HyperlinkedModelSerializer):
