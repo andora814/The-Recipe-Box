@@ -2,7 +2,7 @@
   <div class="recipe_container">
     <div class="container">
       <div> {{ recipe.title }} </div>
-      <img :src="recipe.image" alt="recipe picture" :class="picclass" @mouseover="mouseon" @mouseleave="mouseoff"/>
+      <img :src="recipe.image" alt="recipe picture" :class="picclass" />
       <!-- <div v-if="showName" class="center" >{{ image_card.title }}</div> -->
     </div>
     <div @click="deleteRecipe" class="delBtn">x</div>
@@ -30,15 +30,6 @@ export default {
         })
         this.$emit('handleDelete', this.recipe.id)
     }
-    // mouseon () {
-    //   this.showName = true
-    //   this.picclass = 'blur'
-    // },
-    // mouseoff () {
-    //   this.showName = false
-    //   this.picclass = 'normal'
-    // }
-  // }
 }
 }
 </script>

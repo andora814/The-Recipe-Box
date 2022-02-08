@@ -32,7 +32,8 @@ export default {
         summary: '',
         source: '',
         number: 0,
-        step: ''
+        step: '',
+        new_recipe: {}
     }),
     methods: {
         handleFormChange(e) {
@@ -40,7 +41,7 @@ export default {
         },
         async handleSubmit(e) {
             e.preventDefault()
-            const new_recipe = await axios.post(`http://localhost:8000/recipes/`, {
+            const recipe_response = await axios.post(`http://localhost:8000/recipes/`, {
                 "title": this.title,
                 "ready_in_minutes": this.ready_in_minutes,
                 "servings": this.servings,
@@ -54,9 +55,12 @@ export default {
                     password: 'recipe'
                 }
             })
-            this.$router.push(`/recipes/${new_recipe.data.id}`)
-            const new_instruction = await axios.post(`http://localhost:8000/instructions/`, {
-                "name": this.title + " step " + this.number,
+            this.$router.push(`/recipes/${recipe_response.data.id}`)
+            console.log(recipe_response.data)
+            this.new_recipe=recipe_response.data
+            const instruction_response = await axios.post(`http://localhost:8000/instructions/`, {
+                "recipe_id": this.new_recipe.id,
+                "name": "test name string",
                 "number": this.number,
                 "step": this.step,
             }, {
@@ -65,7 +69,7 @@ export default {
                     password: 'recipe'
                 }
             })
-            console.log(new_instruction)
+            console.log(instruction_response)
         }
     }
 }
