@@ -5,7 +5,9 @@
     <div>Ready in {{ recipeDetails.ready_in_minutes }} minutes</div>
     <div>Serves {{ recipeDetails.servings }}</div>
     <div>{{ recipeDetails.summary }}</div>
-    <div>{{ recipeDetails.recipe_ingredients }}</div>
+    <!-- <div v-for="ingredient in recipeIngredients" :key="ingredient.id"> -->
+      <div>{{ recipeIngredients }}</div>
+    <!-- </div> -->
     <div>{{ recipeDetails.instructions }}</div>
     <button @click="goToUpdateRecipe(recipeDetails.id)">Update Recipe</button>
   </div>
@@ -16,7 +18,8 @@ import axios from 'axios'
 export default {
   name: 'RecipeDetails',
   data: () => ({
-    recipeDetails: null
+    recipeDetails: null,
+    recipeIngredients: null
   }),
   mounted() {
     this.getRecipeDetails(this.$route.params.recipe_id)
@@ -25,9 +28,11 @@ export default {
     async getRecipeDetails(id) {
         const res = await axios.get(`http://localhost:8000/recipes/${id}`)
         this.recipeDetails = res.data
+        this.recipeIngredients = res.data.recipe_ingredients
     },
-    goToUpdateRecipe(id) {
-        this.$router.push(`/updaterecipe/${id}`)
+    goToUpdateRecipe() {
+      console.log(this.recipeIngredients)
+        // this.$router.push(`/updaterecipe/${id}`)
         }
   }
 }
