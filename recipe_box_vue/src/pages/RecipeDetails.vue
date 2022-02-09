@@ -7,6 +7,7 @@
     <div>{{ recipeDetails.summary }}</div>
     <div>{{ recipeDetails.recipe_ingredients }}</div>
     <div>{{ recipeDetails.instructions }}</div>
+    <button @click="goToUpdateRecipe(recipeDetails.id)">Update Recipe</button>
   </div>
 </template>
 
@@ -24,7 +25,10 @@ export default {
     async getRecipeDetails(id) {
         const res = await axios.get(`http://localhost:8000/recipes/${id}`)
         this.recipeDetails = res.data
-    }
+    },
+    goToUpdateRecipe(id) {
+        this.$router.push(`/updaterecipe/${id}`)
+        }
   }
 }
 </script>

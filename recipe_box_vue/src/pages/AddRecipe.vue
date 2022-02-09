@@ -12,11 +12,32 @@
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange"/>
                     <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange" class="summary"/>
                     <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div>
+                    <!-- <div class="ingredient-section">
                         <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
                     </div>
-                    <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange"/>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div>
+                    <button class="btn">Add another ingredient</button> -->
+                    <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange" class="instructions"/>
                     <button class="btn" type="submit">Submit Recipe</button>
                 </div>
             </form>
@@ -36,18 +57,32 @@ export default {
         image: '',
         summary: '',
         instructions: '',
-        number: 0,
-        step: '',
-        new_recipe: {},
+        ingredient: '',
         quantity: 0,
-        unit: ''
+        unit: '',
+        new_recipe: {},
+        new_ingredient: {},
+        add_ingredient: false,
+        ingredient_list: []
     }),
     methods: {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
         },
+        createIngredientList() {
+
+        },
         async handleSubmit(e) {
             e.preventDefault()
+            const ingredient_response = await axios.post(`http://localhost:8000/ingredients/`, {
+                "name": this.ingredient,
+            }, {
+                auth: {
+                    username: 'recipeboxuser',
+                    password: 'recipe'
+                }
+            })
+            this.new_ingredient=ingredient_response.data
             const recipe_response = await axios.post(`http://localhost:8000/recipes/`, {
                 "title": this.title,
                 "ready_in_minutes": this.ready_in_minutes,
@@ -64,21 +99,10 @@ export default {
             })
             this.$router.push(`/recipes/${recipe_response.data.id}`)
             this.new_recipe=recipe_response.data
-            // await axios.post(`http://localhost:8000/instructions/`, {
-            //     "recipe_id": this.new_recipe.id,
-            //     "name": "test name string for instruction",
-            //     "number": this.number,
-            //     "step": this.step,
-            // }, {
-            //     auth: {
-            //         username: 'recipeboxuser',
-            //         password: 'recipe'
-            //     }
-            // })
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
-                "ingredient_id": 4,
-                "name": "test name string for recipe ingredient",
+                "ingredient_id": this.new_ingredient.id,
+                "name": this.new_recipe.title + "_" + this.new_ingredient.name,
                 "quantity": this.quantity,
                 "unit": this.unit,
             }, {
@@ -129,8 +153,9 @@ export default {
         display: flex;
     }
 
-    /* .ingredient-section {
-        display: flex;
-        flex-direction: row;
-    } */
+    .instructions {
+        width: 500px;
+        height: 200px;
+        margin: 10px;  
+    }
 </style>
