@@ -24,7 +24,6 @@ export default {
     async getRecipeDetails(id) {
         const res = await axios.get(`http://localhost:8000/recipes/${id}`)
         this.recipeDetails = res.data
-        console.log(this.recipeDetails)
     }
   }
 }

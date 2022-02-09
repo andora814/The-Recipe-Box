@@ -3,17 +3,19 @@
         <div class="form-container">
             <form @submit="handleSubmit">
                 <div class="flex">
-                    <h5>Add a new recipe</h5>
-                    <input placeholder="Title" name="title" type="recipe_title" v-on:input="handleFormChange"/>
-                    <input placeholder="Total minutes" name="ready_in_minutes" type="ready_in_minutes" v-on:input="handleFormChange"/>
-                    <input placeholder="# of Servings" name="servings" type="servings" v-on:input="handleFormChange"/>
+                    <h3>Add a new recipe</h3>
+                    <div class="title-minutes-servings-section">
+                        <input placeholder="Title" name="title" type="recipe_title" v-on:input="handleFormChange" class="title-field"/>
+                        <input placeholder="Total minutes" name="ready_in_minutes" type="ready_in_minutes" v-on:input="handleFormChange" class="integer-field"/>
+                        <input placeholder="# of Servings" name="servings" type="servings" v-on:input="handleFormChange" class="integer-field"/>
+                    </div>
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange"/>
-                    <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange"/>
-                    <!-- <div class="ingredient-section"> -->
-                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange"/>
-                    <!-- </div> -->
+                    <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange" class="summary"/>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div>
                     <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange"/>
                     <button class="btn" type="submit">Submit Recipe</button>
                 </div>
@@ -95,11 +97,11 @@ export default {
 
 <style scoped>
     h3 {
-        color: #80cbc4;
+        color: green;
     }
     input {
         width: 500px;
-        height: 60px;
+        height: 30px;
         margin: 10px;    
     }
     .flex {
@@ -113,6 +115,20 @@ export default {
         width: 509px;
         margin: 10px; 
     }
+    .integer-field, .quantity, .unit {
+        width: 100px;
+        height: 30px;
+        margin: 10px;
+    }
+    .title-field, .ingredient {
+        width: 240px;
+        height: 30px;
+        margin: 10px;
+    }
+    .title-minutes-servings-section, .ingredient-section {
+        display: flex;
+    }
+
     /* .ingredient-section {
         display: flex;
         flex-direction: row;
