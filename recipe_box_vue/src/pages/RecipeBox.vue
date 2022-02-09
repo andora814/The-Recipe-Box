@@ -1,7 +1,7 @@
 <template>
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
-            <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete"/>
+            <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
         </div>
     </div>
 </template>
@@ -27,6 +27,9 @@ export default {
         },
         handleDelete(id) {
             this.recipe_array = this.recipe_array.filter(recipe => recipe.id !== id)
+        },
+        selectRecipe(id) {
+            this.$router.push(`/recipedetails/${id}`)
         }
     }
     

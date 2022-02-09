@@ -1,9 +1,8 @@
 <template>
-  <div class="recipe_container">
+  <div class="recipe_container" @click="selectRecipe()">
     <div class="container">
       <div> {{ recipe.title }} </div>
       <img :src="recipe.image" alt="recipe picture" :class="picclass" />
-      <!-- <div v-if="showName" class="center" >{{ image_card.title }}</div> -->
     </div>
     <div @click="deleteRecipe" class="delBtn">x</div>
   </div>
@@ -29,6 +28,9 @@ export default {
           }
         })
         this.$emit('handleDelete', this.recipe.id)
+    },
+    selectRecipe(){
+      this.$emit('click')
     }
 }
 }

@@ -7,19 +7,10 @@ class Recipe(models.Model):
   source_url = models.TextField(blank=True)
   image = models.TextField()
   summary = models.TextField()
-  source = models.CharField(max_length=100)
+  instructions = models.TextField(default="no instructions")
 
   def __str__(self):
     return self.title
-
-class Instruction(models.Model):
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='instructions')
-  name = models.CharField(max_length=100)
-  number = models.IntegerField()
-  step = models.CharField(max_length=100)
-
-  def __str__(self):
-    return self.name
 
 class Ingredient(models.Model):
   name = models.CharField(max_length=100)

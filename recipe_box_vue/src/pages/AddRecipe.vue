@@ -9,12 +9,12 @@
                     <input placeholder="# of Servings" name="servings" type="servings" v-on:input="handleFormChange"/>
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange"/>
                     <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange"/>
-                    <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange"/>
-                    <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange"/>
-                    <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange"/>
-                    <input placeholder="Step #" name="number" type="number" v-on:input="handleFormChange"/>
-                    <input placeholder="Instructions" name="step" type="step" v-on:input="handleFormChange"/>
-                    <input placeholder="Source" name="source" type="source" v-on:input="handleFormChange"/>
+                    <!-- <div class="ingredient-section"> -->
+                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange"/>
+                    <!-- </div> -->
+                    <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange"/>
                     <button class="btn" type="submit">Submit Recipe</button>
                 </div>
             </form>
@@ -33,7 +33,7 @@ export default {
         source_url: '',
         image: '',
         summary: '',
-        source: '',
+        instructions: '',
         number: 0,
         step: '',
         new_recipe: {},
@@ -53,7 +53,7 @@ export default {
                 "source_url": this.source_url,
                 "image": this.image,
                 "summary": this.summary,
-                "source": this.source
+                "instructions": this.instructions
             }, {
                 auth: {
                     username: 'recipeboxuser',
@@ -62,17 +62,17 @@ export default {
             })
             this.$router.push(`/recipes/${recipe_response.data.id}`)
             this.new_recipe=recipe_response.data
-            await axios.post(`http://localhost:8000/instructions/`, {
-                "recipe_id": this.new_recipe.id,
-                "name": "test name string for instruction",
-                "number": this.number,
-                "step": this.step,
-            }, {
-                auth: {
-                    username: 'recipeboxuser',
-                    password: 'recipe'
-                }
-            })
+            // await axios.post(`http://localhost:8000/instructions/`, {
+            //     "recipe_id": this.new_recipe.id,
+            //     "name": "test name string for instruction",
+            //     "number": this.number,
+            //     "step": this.step,
+            // }, {
+            //     auth: {
+            //         username: 'recipeboxuser',
+            //         password: 'recipe'
+            //     }
+            // })
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
                 "ingredient_id": 4,
@@ -113,4 +113,8 @@ export default {
         width: 509px;
         margin: 10px; 
     }
+    /* .ingredient-section {
+        display: flex;
+        flex-direction: row;
+    } */
 </style>
