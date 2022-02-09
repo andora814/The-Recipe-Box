@@ -5,9 +5,11 @@
     <div>Ready in {{ recipeDetails.ready_in_minutes }} minutes</div>
     <div>Serves {{ recipeDetails.servings }}</div>
     <div>{{ recipeDetails.summary }}</div>
-    <!-- <div v-for="ingredient in recipeIngredients" :key="ingredient.id"> -->
-      <div>{{ recipeIngredients }}</div>
-    <!-- </div> -->
+    <div>Ingredient List:
+        <div v-for="ingredient in recipeIngredients" :key="ingredient.id">
+          {{ ingredient.quantity}} {{ingredient.unit}} of {{ ingredient.name }}
+        </div>
+    </div>
     <div>{{ recipeDetails.instructions }}</div>
     <button @click="goToUpdateRecipe(recipeDetails.id)">Update Recipe</button>
   </div>
