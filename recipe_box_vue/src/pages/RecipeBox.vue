@@ -37,5 +37,14 @@ export default {
 </script>
 
 <style scoped>
-
+  .image  {
+    width: 500px;
+    height: 250px
+  }
+  .recipe-container-grid {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+  }
 </style>

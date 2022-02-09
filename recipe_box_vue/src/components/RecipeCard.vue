@@ -1,10 +1,10 @@
 <template>
   <div class="recipe_container" @click="selectRecipe()">
     <div class="container">
-      <div> {{ recipe.title }} </div>
-      <img :src="recipe.image" alt="recipe picture" :class="picclass" />
+      <h3> {{ recipe.title }} </h3>
+      <img :src="recipe.image" alt="recipe picture" class="image" />
+      <div @click="deleteRecipe" class="delBtn">remove</div>
     </div>
-    <div @click="deleteRecipe" class="delBtn">x</div>
   </div>
 </template>
 
@@ -38,14 +38,10 @@ export default {
 
 <style scoped>
 
-img {
-  max-height: 200px;
-  border-radius: 7px 7px 0 0;
-}
-
 .container {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -57,17 +53,17 @@ img {
   color: black
 }
 
-img { 
-  width: 100%;
-  height: auto;
-}
+.image  {
+    width: 250px;
+    height: 125px
+  }
 
 .blur {
   opacity: 0.6;
 }
 
-.image_card_container {
-  width: 300px;
+.recipe_container {
+  width: 250px;
   margin-bottom: 10px;
 }
 

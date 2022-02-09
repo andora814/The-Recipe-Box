@@ -1,5 +1,13 @@
 <template>
-  <div>{{ recipeDetails.title }}</div>
+  <div class="recipe-content">
+    <h3>{{ recipeDetails.title }}</h3>
+    <img :src="recipeDetails.image" class="image"/>
+    <div>Ready in {{ recipeDetails.ready_in_minutes }} minutes</div>
+    <div>Serves {{ recipeDetails.servings }}</div>
+    <div>{{ recipeDetails.summary }}</div>
+    <div>{{ recipeDetails.recipe_ingredients }}</div>
+    <div>{{ recipeDetails.instructions }}</div>
+  </div>
 </template>
 
 <script>
@@ -22,6 +30,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .image  {
+    width: 500px;
+    height: 250px
+  }
 </style>
