@@ -21,7 +21,9 @@ export default {
     methods: {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
-            this.ExternalFoodSearch(this.food_search)
+            if(e.target.value.length > 5) {
+                this.ExternalFoodSearch(this.food_search)
+            }
         },
         async ExternalFoodSearch (keyword) { 
             const res = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${keyword}&number=20&sort=calories&sortDirection=desc&apiKey=9e2e99bbc2e8487baf824d1acd1621e9`);
