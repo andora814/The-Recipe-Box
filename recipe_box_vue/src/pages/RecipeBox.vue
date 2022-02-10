@@ -1,8 +1,13 @@
 <template>
+   <div>
+    <input placeholder="Enter food name" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field"/>
+    <button @click="filterRecipes">Search Recipe Box</button>
+    <!-- <button @click="clearSearch">Clear Search</button> -->
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
             <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
         </div>
+    </div>
     </div>
 </template>
 
@@ -15,12 +20,17 @@ export default {
         RecipeCard
     },
     data: () => ({
-        recipe_array: []
+        recipe_array: [],
+        filtered_recipes: [],
+        search_input: ''
     }),
     mounted() {
         this.getRecipes()
     },
     methods: {
+        handleSearchChange(e) {
+            this[e.target.name] = e.target.value
+        },
         async getRecipes() {
             const res = await axios.get(`http://localhost:8000/recipes`)
             this.recipe_array = res.data
@@ -30,6 +40,15 @@ export default {
         },
         selectRecipe(id) {
             this.$router.push(`/recipedetails/${id}`)
+        },
+        filterRecipes() {
+            // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.recipe_ingredients.includes(this.search_input));
+            this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
+            // how do i search ingredients instead of title?
+            // how do i enable user to click on recipe box after searching?
+            // how do i search regardless of capitalization?
+            this.recipe_array = this.filtered_recipes
+            this.search_input = ''
         }
     }
     
