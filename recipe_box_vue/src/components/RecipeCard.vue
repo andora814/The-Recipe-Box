@@ -1,8 +1,10 @@
 <template>
-  <div class="recipe_container" @click="selectRecipe()">
+  <div class="recipe_container">
     <div class="container">
-      <h3> {{ recipe.title }} </h3>
-      <img :src="recipe.image" alt="recipe picture" class="image" />
+      <div @click="selectRecipe()">
+        <h3> {{ recipe.title }} </h3>
+        <img :src="recipe.image" alt="recipe picture" class="image" />
+      </div>
       <div @click="deleteRecipe" class="delBtn">remove</div>
     </div>
   </div>
