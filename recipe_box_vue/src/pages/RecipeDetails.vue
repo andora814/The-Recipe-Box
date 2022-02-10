@@ -10,7 +10,7 @@
           {{ ingredient.quantity}} {{ingredient.unit}} of {{ ingredient.name }}
         </div>
     </div>
-    <div>{{ recipeDetails.instructions }}</div>
+    <div>Instructions: {{ recipeDetails.instructions }}</div>
     <button @click="goToUpdateRecipe(recipeDetails.id)">Update Recipe</button>
   </div>
 </template>

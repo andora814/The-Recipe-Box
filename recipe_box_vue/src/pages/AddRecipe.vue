@@ -1,7 +1,7 @@
 <template>
     <div id="recipeform">
         <div class="form-container">
-            <form @submit="handleSubmit">
+            <form @submit="handleSubmit" v-if="show_recipe">
                 <div class="flex">
                     <h3>Add a new recipe</h3>
                     <div class="title-minutes-servings-section">
@@ -12,9 +12,11 @@
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange"/>
                     <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange" class="summary"/>
                     <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange" class="instructions"/>
-                    <button class="btn" type="submit">Submit Recipe</button>
+                    <button class="btn" type="submit">Next</button>
                 </div>
             </form>
+            <div v-if="show_ingredients" class="flex">
+                    <h3>Add ingredients</h3>
                     <div class="ingredient-section">
                         <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
@@ -45,19 +47,10 @@
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
                         <button @click="addIngredient">+</button>
                     </div>
-                    <!-- <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="ingredient1" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity1" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit1" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div>
-                    <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="ingredient2" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity2" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit2" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div> -->
-                </div>
-
+            </div>
         </div>
+
+    </div>
 
 </template>
 
@@ -78,7 +71,8 @@ export default {
         unit: '',
         new_recipe: {},
         new_ingredient: {},
-        // add_ingredient: false,
+        show_recipe: true,
+        show_ingredients: false,
         ingredient_list: [],
 
     }),
@@ -105,6 +99,8 @@ export default {
             })
             // this.$router.push(`/recipes/${recipe_response.data.id}`)
             this.new_recipe=recipe_response.data
+            this.show_recipe = false
+            this.show_ingredients = true
         },
         async addIngredient() {
             this.ingredient_list.push({
