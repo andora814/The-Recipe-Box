@@ -1,15 +1,14 @@
 <template>
-    <div>
-    <input placeholder="Search food" name="search_word" type="food_search" v-on:input="handleFormChange" class="food-search"/>
+    <div class="search-container">
+    <input placeholder="Search external API" name="search_word" type="food_search" v-on:input="handleFormChange" class="food-search"/>
             <div>
-                <div v-if="show_food_search">
-                    <div v-for="food in food_search" :key="food.id">
-                        <div> {{ food.name }} </div>
-                        <button @click="SelectFood(food.name)">Select food</button>
+                <div v-if="show_food_search" class="suggestions-container">
+                    <div v-for="food in food_search" :key="food.id" class="suggestions">
+                        <div @click="SelectFood(food.name)"> {{ food.name }} </div>
                     </div>
                 </div>
             </div>
-    <button @click="ExternalFoodSearch(search_word)">Search</button>
+    <button @click="ExternalFoodSearch(search_word)">Search external API</button>
     <div>
         <div v-for="ingredient in all_ingredients" :key="ingredient.id">
             {{ ingredient.name }}
@@ -64,12 +63,30 @@ export default {
         async GetAllFood() {
             const response = await axios.get('http://localhost:8000/ingredients/'
             )
-            this.all_ingredients =response.data
+            this.all_ingredients =response.data.sort()
         }
     }
 }
 </script>
 
 <style scoped>
+.suggestions {
+    cursor: pointer
+}
+
+.suggestions:hover {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.suggestions-container {
+    position: absolute;
+    background-color: green;
+    border-radius: 0 0px 10px 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
 
 </style>

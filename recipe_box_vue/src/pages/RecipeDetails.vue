@@ -14,7 +14,7 @@
       </div>
       <div v-if="edit_ingredients">
         <div v-for="ingredient in recipe_ingredients" :key="ingredient.id">
-          <input v-on:input="handleFormChange" placeholder=this.ingredient.quantity /> <input v-on:input="handleFormChange" placeholder=this.ingredient.unit /> of <input v-on:input="handleFormChange" placeholder=this.ingredient.name />
+          <input v-on:input="handleFormChange" :value="ingredient.quantity" /> <input v-on:input="handleFormChange" :value="ingredient.unit" /> of <input v-on:input="handleFormChange" :value="ingredient.name" />
         </div>
         <button @click="saveIngredientList">Save Ingredients</button>
       </div>
@@ -25,7 +25,7 @@
         <button @click="editInstructions">Edit Instructions</button>
       </div>
       <div v-if="edit_instructions">
-        <input v-on:input="handleFormChange" name="new_instructions" placeholder=recipe_details.instructions /> 
+        <input v-on:input="handleFormChange" name="new_instructions" :value="recipe_details.instructions" /> 
         <button @click="saveInstructions(recipe_details.id)">Save Instructions</button>
       </div>
     </div>
