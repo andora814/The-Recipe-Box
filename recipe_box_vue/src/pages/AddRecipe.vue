@@ -17,6 +17,11 @@
             </form>
             <div v-if="show_ingredients" class="flex">
                     <h3>Add ingredients</h3>
+                    <ul>
+                        <li v-for="ingredient in ingredient_list" :key="ingredient.id">
+                            {{ ingredient.quantity}} {{ingredient.unit}} of {{ ingredient.ingredient }}
+                        </li>
+                    </ul>
                     <div class="ingredient-section">
                         <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
@@ -47,6 +52,7 @@
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
                         <button @click="addIngredient">+</button>
                     </div>
+                    <button>Add recipe card!</button>
             </div>
         </div>
 
@@ -82,7 +88,6 @@ export default {
         },
         async handleSubmit(e) {
             e.preventDefault()
-       
             const recipe_response = await axios.post(`http://localhost:8000/recipes/`, {
                 "title": this.title,
                 "ready_in_minutes": this.ready_in_minutes,

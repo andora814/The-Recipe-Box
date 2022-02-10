@@ -1,9 +1,12 @@
 <template>
     <div>This is Home.
     <input placeholder="Search food" name="food_search" type="food_search" v-on:input="handleFormChange" class="food-search"/>
-            <div v-for="food in food_search" :key="food.id">
-                <div> {{ food.name }} </div>
-                <!-- <div @click="SelectFood(food.name)"> {{ food.name }} </div> -->
+            <div>
+                <!-- <div> {{ food.name }} </div> -->
+                <div v-for="food in food_search" :key="food.id">
+                    <div> {{ food.name }} </div>
+                    <button @click="SelectFood(food.name)">Select food</button>
+                </div>
             </div>
     </div>
 </template>
@@ -19,6 +22,7 @@ export default {
     },
     data: () => ({
         food_search: [],
+        show_food_search: false
     }),
     mounted() {
   
@@ -27,6 +31,7 @@ export default {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
             if(e.target.value.length >= 3) {
+                this.show_food_search=true
                 this.ExternalFoodSearch(this.food_search)
             }
         },
@@ -44,6 +49,7 @@ export default {
                     password: 'recipe'
                 }
             })
+            this.show_food_search=false
         }
     }
 }
