@@ -11,38 +11,54 @@
                     </div>
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange"/>
                     <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange" class="summary"/>
-                    <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div>
-                    <!-- <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div>
-                    <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div>
-                    <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div>
-                    <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="recipe_ingredient" type="recipe_ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
-                    </div>
-                    <button class="btn">Add another ingredient</button> -->
                     <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange" class="instructions"/>
                     <button class="btn" type="submit">Submit Recipe</button>
                 </div>
             </form>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                        <button @click="addIngredient">+</button>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                        <button @click="addIngredient">+</button>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                        <button @click="addIngredient">+</button>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                        <button @click="addIngredient">+</button>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                        <button @click="addIngredient">+</button>
+                    </div>
+                    <!-- <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient1" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity1" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit1" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div>
+                    <div class="ingredient-section">
+                        <input placeholder="Ingredient" name="ingredient2" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
+                        <input placeholder="Quantity" name="quantity2" type="quantity" v-on:input="handleFormChange" class="quantity"/>
+                        <input placeholder="Unit" name="unit2" type="unit" v-on:input="handleFormChange" class="unit"/>
+                    </div> -->
+                </div>
+
         </div>
-    </div>
+
 </template>
 
 <script>
@@ -62,27 +78,17 @@ export default {
         unit: '',
         new_recipe: {},
         new_ingredient: {},
-        add_ingredient: false,
-        ingredient_list: []
+        // add_ingredient: false,
+        ingredient_list: [],
+
     }),
     methods: {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
         },
-        createIngredientList() {
-
-        },
         async handleSubmit(e) {
             e.preventDefault()
-            const ingredient_response = await axios.post(`http://localhost:8000/ingredients/`, {
-                "name": this.ingredient,
-            }, {
-                auth: {
-                    username: 'recipeboxuser',
-                    password: 'recipe'
-                }
-            })
-            this.new_ingredient=ingredient_response.data
+       
             const recipe_response = await axios.post(`http://localhost:8000/recipes/`, {
                 "title": this.title,
                 "ready_in_minutes": this.ready_in_minutes,
@@ -97,12 +103,29 @@ export default {
                     password: 'recipe'
                 }
             })
-            this.$router.push(`/recipes/${recipe_response.data.id}`)
+            // this.$router.push(`/recipes/${recipe_response.data.id}`)
             this.new_recipe=recipe_response.data
+        },
+        async addIngredient() {
+            this.ingredient_list.push({
+                "ingredient": this.ingredient,
+                "quantity": this.quantity,
+                "unit": this.unit
+            })
+            console.log(this.ingredient_list)
+            const ingredient_response = await axios.post(`http://localhost:8000/ingredients/`, {
+                "name": this.ingredient,
+            }, {
+                auth: {
+                    username: 'recipeboxuser',
+                    password: 'recipe'
+                }
+            })
+            this.new_ingredient=ingredient_response.data
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
                 "ingredient_id": this.new_ingredient.id,
-                "name": this.new_recipe.title + "_" + this.new_ingredient.name,
+                "name": this.new_ingredient.name,
                 "quantity": this.quantity,
                 "unit": this.unit,
             }, {
@@ -111,7 +134,8 @@ export default {
                     password: 'recipe'
                 }
             })
-        }
+        },
+
     }
 }
 
