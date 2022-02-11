@@ -22,7 +22,8 @@ export default {
     data: () => ({
         recipe_array: [],
         filtered_recipes: [],
-        search_input: ''
+        search_input: '',
+        full_list_of_recipes: []
     }),
     mounted() {
         this.getRecipes()
@@ -34,6 +35,7 @@ export default {
         async getRecipes() {
             const res = await axios.get(`http://localhost:8000/recipes`)
             this.recipe_array = res.data
+            this.full_list_of_recipes = res.data
         },
         handleDelete(id) {
             this.recipe_array = this.recipe_array.filter(recipe => recipe.id !== id)
@@ -45,16 +47,19 @@ export default {
             let array = []
             for (let i=0; i<this.recipe_array.length; i++) {
                 for(let j=0; j<this.recipe_array[i].recipe_ingredients.length; j++) {
-                    if(this.recipe_array[i].recipe_ingredients[j].name.includes(this.search_input)) {
+                    if(this.recipe_array[i].recipe_ingredients[j].name.toLowerCase().includes(this.search_input.toLowerCase())) {
                         array.push(this.recipe_array[i])
-                        console.log(array)
                     }
                 }
                 }
             this.filtered_recipes = array
             this.recipe_array = this.filtered_recipes
-            this.search_input = ''
+            // this.search_input = ''
             }
+        // clearSearch() {
+        //     this.search_input = ''
+        //     this.$forceUpdate()
+        // }
         }
     }
             // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
