@@ -1,8 +1,8 @@
 <template>
    <div>
     <input placeholder="Enter food name" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field"/>
-    <button @click="filterRecipes">Search Recipe Box</button>
-    <!-- <button @click="clearSearch">Clear Search</button> -->
+    <button @click="filterRecipes" :disabled="search_disabled">Search Recipe Box</button>
+    <button @click="clearSearch">Clear Search</button>
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
             <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
@@ -23,7 +23,8 @@ export default {
         recipe_array: [],
         filtered_recipes: [],
         search_input: '',
-        full_list_of_recipes: []
+        search_disabled: false,
+        original_recipe_array: []
     }),
     mounted() {
         this.getRecipes()
@@ -35,7 +36,7 @@ export default {
         async getRecipes() {
             const res = await axios.get(`http://localhost:8000/recipes`)
             this.recipe_array = res.data
-            this.full_list_of_recipes = res.data
+            this.original_recipe_array = res.data
         },
         handleDelete(id) {
             this.recipe_array = this.recipe_array.filter(recipe => recipe.id !== id)
@@ -44,7 +45,9 @@ export default {
             this.$router.push(`/recipedetails/${id}`)
         },
         filterRecipes() {
+            this.search_disabled = true
             let array = []
+            if(this.search_input.length>0) {
             for (let i=0; i<this.recipe_array.length; i++) {
                 for(let j=0; j<this.recipe_array[i].recipe_ingredients.length; j++) {
                     if(this.recipe_array[i].recipe_ingredients[j].name.toLowerCase().includes(this.search_input.toLowerCase())) {
@@ -54,18 +57,23 @@ export default {
                 }
             this.filtered_recipes = array
             this.recipe_array = this.filtered_recipes
-            // this.search_input = ''
+            this.search_input=''
+            } else {
+                this.search_disabled = false
             }
-        // clearSearch() {
-        //     this.search_input = ''
-        //     this.$forceUpdate()
-        // }
+            },
+        clearSearch() {
+            this.search_input = ''
+            this.search_disabled = false
+            this.recipe_array = this.original_recipe_array
+            this.filtered_recipes = []
+        }
         }
     }
             // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
             // TO DO:
             // Search ingredients instead of title
-            // Enable user to click on recipe box after searching
+            // Add clear search button
             // Search regardless of capitalization
     
 
