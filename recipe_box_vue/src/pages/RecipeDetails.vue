@@ -13,9 +13,9 @@
         <button @click="editIngredientList">Edit Ingredients</button>
       </div>
       <div v-if="edit_ingredients">
-        <div v-for="ingredient in recipe_ingredients" :key="ingredient.id">
-          <input v-on:input="handleFormChange" :value="ingredient.quantity" name="new_quantity"/> <input v-on:input="handleFormChange" :value="ingredient.unit" name="new_unit"/> of {{ ingredient.name }} 
-          <button @click="handleEdit(ingredient.id)">Save</button>
+        <div v-for="(ingredient, index) in recipe_ingredients" :key="ingredient.id">
+          <input v-on:input="handleFormChange" :value="ingredient.quantity" v-bind:index="index" name="new_quantity"/> <input v-on:input="handleFormChange" :value="ingredient.unit" name="new_unit"/> of {{ ingredient.name }} 
+          <button @click="handleEdit(ingredient.id, index)">Save</button>
         </div>
         <button @click="saveIngredientList">Save Ingredients</button>
       </div>
@@ -92,30 +92,32 @@ export default {
     handleFormChange(e) {
       this[e.target.name] = e.target.value
     },
-    async handleEdit() {
-      // let res = await axios.put(`http://localhost:8000/recipeingredients/${id}`, {
-      //           "recipe_id": this.recipe_ingredients.recipe_id,
-      //           "ingredient_id": this.recipe_ingredients.ingredient_id,
-      //           "name": this.recipe_ingredients.name,
-      //           "quantity": this.new_quantity,
-      //           "unit": this.new_unit
-      // }, {
-      //           auth: {
-      //               username: 'recipeboxuser',
-      //               password: 'recipe'
-      //           }
-      //       })
+    async handleEdit(id, index) {
+      let res = await axios.put(`http://localhost:8000/recipeingredients/${id}`, {
+                "recipe_id": this.recipe_ingredients[index].recipe_id,
+                "ingredient_id": this.recipe_ingredients[index].ingredient_id,
+                "name": this.recipe_ingredients[index].name,
+                "quantity": this.new_quantity,
+                "unit": this.new_unit
+      }, {
+                auth: {
+                    username: 'recipeboxuser',
+                    password: 'recipe'
+                }
+            })
       console.log(this.recipe_ingredients)
-      console.log(this.recipe_ingredients.recipe_id)
-      console.log(this.recipe_ingredients.ingredient_id)
-      console.log(this.recipe_ingredients.name)
+      console.log(this.recipe_ingredients[index].recipe_id)
+      console.log(this.recipe_ingredients[index].ingredient_id)
+      console.log(this.recipe_ingredients[index].name)
       console.log(this.new_quantity)
       console.log(this.new_unit)
-      // console.log(res)
+      console.log(id)
+      console.log(res)
       // TO DO
       // access recipe_ingredients here
-      // this.recipe_ingredients.quantity = res.data.quantity
-      // this.recipe_ingredients.unit = res.data.unit
+      this.recipe_ingredients.quantity = res.data.quantity
+      this.recipe_ingredients.unit = res.data.unit
+      
     }
 }
 }
