@@ -4,10 +4,12 @@ import About from './pages/About';
 import RecipeBox from './pages/RecipeBox';
 import AddRecipe from './pages/AddRecipe';
 import RecipeDetails from './pages/RecipeDetails';
+import APIPlayground from './pages/APIPlayground';
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
   { path: '/recipebox', component: RecipeBox, name: 'RecipeBox' },
+  { path: '/apiplayground', component: APIPlayground, name: 'APIPlayground' },
   { path: '/addrecipe', component: AddRecipe, name: 'AddRecipe' },
   { path: '/about', component: About, name: 'About' },
   {

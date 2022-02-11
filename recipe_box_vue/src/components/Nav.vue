@@ -4,6 +4,7 @@
     <router-link to="/recipebox" class="nav-btn">Recipe Box</router-link>
     <router-link to="/addrecipe" class="nav-btn">Add a Recipe</router-link>
     <router-link to="/about" class="nav-btn">About</router-link>
+    <router-link to="/apiplayground" class="nav-btn">API Playground</router-link>
   </nav>
 </template>
 
