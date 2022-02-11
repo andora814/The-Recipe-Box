@@ -5,7 +5,7 @@
         <h3> {{ recipe.title }} </h3>
         <img :src="recipe.image" alt="recipe picture" class="image" />
       </div>
-      <div @click="deleteRecipe" class="delBtn">remove</div>
+      <div @click="deleteRecipe(recipe.id)" class="delBtn">remove</div>
     </div>
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
     recipe: Object
   },
   methods: {
-    async deleteRecipe() {
-        await axios.delete(`http://localhost:8000/recipes/${this.recipe.id}`, {
+    async deleteRecipe(id) {
+        await axios.delete(`http://localhost:8000/recipes/${id}`, {
           auth: {
             username: 'recipeboxuser',
             password: 'recipe'
@@ -67,6 +67,14 @@ export default {
 .recipe_container {
   width: 250px;
   margin-bottom: 10px;
+  background-color: green;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.recipe_container:hover {
+  transform: scale(1.025);
 }
 
 .delBtn {

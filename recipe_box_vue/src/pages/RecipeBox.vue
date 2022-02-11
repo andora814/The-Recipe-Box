@@ -42,28 +42,39 @@ export default {
             this.$router.push(`/recipedetails/${id}`)
         },
         filterRecipes() {
-            // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.recipe_ingredients.includes(this.search_input));
-            this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
-            // how do i search ingredients instead of title?
-            // how do i enable user to click on recipe box after searching?
-            // how do i search regardless of capitalization?
+            let array = []
+            for (let i=0; i<this.recipe_array.length; i++) {
+                for(let j=0; j<this.recipe_array[i].recipe_ingredients.length; j++) {
+                    if(this.recipe_array[i].recipe_ingredients[j].name.includes(this.search_input)) {
+                        array.push(this.recipe_array[i])
+                        console.log(array)
+                    }
+                }
+                }
+            this.filtered_recipes = array
             this.recipe_array = this.filtered_recipes
             this.search_input = ''
+            }
         }
     }
+            // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
+            // TO DO:
+            // Search ingredients instead of title
+            // Enable user to click on recipe box after searching
+            // Search regardless of capitalization
     
-}
+
 </script>
 
 <style scoped>
-  .image  {
+.image  {
     width: 500px;
     height: 250px
-  }
-  .recipe-container-grid {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: space-around;
-  }
+}
+.recipe-container-grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
 </style>
