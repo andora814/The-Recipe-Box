@@ -38,10 +38,6 @@ export default {
     methods: {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
-            // if(e.target.value.length >= 3) {
-                // this.show_food_search=true
-                // this.ExternalFoodSearch(this.food_search)
-            // }
         },
         async ExternalFoodSearch (keyword) { 
             this.show_food_search = true

@@ -23,10 +23,15 @@
                         </li>
                     </ul>
                     <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient" :value="ingredient"/>
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleIngredientFormChange" class="ingredient" :value="ingredient"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity" :value="quantity"/>
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit" :value="unit"/>
                         <button @click="addIngredient">Add ingredient to recipebox</button>
+                    </div>
+                    <div v-if="show_pantry_search" class="suggestions-container">
+                        <div v-for="pantry_item in pantry" :key="pantry_item.id" class="suggestions">
+                            <div @click="SelectPantryItem(pantry_item.name)"> {{ pantry_item.name }} </div>
+                        </div>
                     </div>
                     <button @click="selectRecipe(new_recipe.id)">Add to Recipe Box</button>
             </div>
@@ -55,11 +60,31 @@ export default {
         new_ingredient: {},
         show_recipe: true,
         show_ingredients: false,
-        ingredient_list: []
+        ingredient_list: [],
+        pantry: [],
+        show_pantry_search: false,
     }),
     methods: {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
+        },
+        handleIngredientFormChange(e) {
+            console.log("handle ingredient form change is being called")
+            this[e.target.name] = e.target.value
+            if(e.target.value.length > 3) {
+                this.PantrySearch(this.ingredient)
+            }
+        },
+        async PantrySearch(keyword) {
+            console.log(keyword)
+            this.show_pantry_search = true
+            const response = await axios.get('http://localhost:8000/ingredients/')
+            this.pantry = response.data
+            console.log(this.pantry)
+        },
+        SelectPantryItem(pantry_item) {
+            this.ingredient = pantry_item
+            this.show_pantry_search=false
         },
         async handleSubmit(e) {
             e.preventDefault()
@@ -161,5 +186,23 @@ export default {
         width: 500px;
         height: 200px;
         margin: 10px;  
+    }
+    .suggestions {
+    cursor: pointer
+    }
+
+    .suggestions:hover {
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .suggestions-container {
+        position: absolute;
+        background-color: green;
+        border-radius: 0 0px 10px 10px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        width: 200px;
     }
 </style>
