@@ -23,9 +23,9 @@
                         </li>
                     </ul>
                     <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient"/>
-                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity"/>
-                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit"/>
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient" :value="ingredient"/>
+                        <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity" :value="quantity"/>
+                        <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit" :value="unit"/>
                         <button @click="addIngredient">+</button>
                     </div>
                     <button @click="selectRecipe(new_recipe.id)">Add recipe card!</button>
@@ -109,6 +109,9 @@ export default {
                     password: 'recipe'
                 }
             })
+            this.ingredient=""
+            this.quantity=""
+            this.unit=""
         },
         selectRecipe(id) {
             this.$router.push(`/recipedetails/${id}`)

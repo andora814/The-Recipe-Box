@@ -8,7 +8,7 @@ import APIPlayground from './pages/APIPlayground';
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
-  { path: '/recipebox', component: RecipeBox, name: 'RecipeBox' },
+  { path: '/recipebox', component: RecipeBox, name: 'RecipeBox', props: true },
   { path: '/apiplayground', component: APIPlayground, name: 'APIPlayground' },
   { path: '/addrecipe', component: AddRecipe, name: 'AddRecipe' },
   { path: '/about', component: About, name: 'About' },

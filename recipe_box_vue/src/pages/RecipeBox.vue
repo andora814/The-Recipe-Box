@@ -1,8 +1,8 @@
 <template>
    <div>
-    <input placeholder="Enter food name" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field"/>
-    <button @click="filterRecipes" :disabled="search_disabled">Search Recipe Box</button>
-    <button @click="clearSearch">Clear Search</button>
+    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input"/>
+    <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
+    <button @click="clearSearch">Clear</button>
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
             <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
@@ -19,6 +19,9 @@ export default {
     components: {
         RecipeCard
     },
+    props: {
+        searched_word: String
+    },
     data: () => ({
         recipe_array: [],
         filtered_recipes: [],
@@ -34,9 +37,17 @@ export default {
             this[e.target.name] = e.target.value
         },
         async getRecipes() {
+            if(this.searched_word) {
+                const res = await axios.get(`http://localhost:8000/recipes`)
+                this.recipe_array = res.data
+                this.original_recipe_array = res.data
+                this.filterRecipes(this.searched_word)
+                this.search_input=this.searched_word
+            } else {
             const res = await axios.get(`http://localhost:8000/recipes`)
             this.recipe_array = res.data
             this.original_recipe_array = res.data
+            }
         },
         handleDelete(id) {
             this.recipe_array = this.recipe_array.filter(recipe => recipe.id !== id)
@@ -44,13 +55,13 @@ export default {
         selectRecipe(id) {
             this.$router.push(`/recipedetails/${id}`)
         },
-        filterRecipes() {
+        filterRecipes(search_input) {
             this.search_disabled = true
             let array = []
-            if(this.search_input.length>0) {
+            if(search_input.length>0) {
             for (let i=0; i<this.recipe_array.length; i++) {
                 for(let j=0; j<this.recipe_array[i].recipe_ingredients.length; j++) {
-                    if(this.recipe_array[i].recipe_ingredients[j].name.toLowerCase().includes(this.search_input.toLowerCase())) {
+                    if(this.recipe_array[i].recipe_ingredients[j].name.toLowerCase().includes(search_input.toLowerCase())) {
                         array.push(this.recipe_array[i])
                     }
                 }
@@ -72,9 +83,8 @@ export default {
     }
             // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
             // TO DO:
-            // Search ingredients instead of title
-            // Add clear search button
             // Search regardless of capitalization
+            // search title AND ingredients?
     
 
 </script>

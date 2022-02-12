@@ -65,6 +65,7 @@ export default {
     saveIngredientList() {
       this.edit_ingredients = false
       this.show_ingredients = true
+      window.location.reload()
     },
     editInstructions() {
       this.edit_instructions = true
@@ -88,6 +89,7 @@ export default {
                 }
             })
       this.recipe_details.instructions = res.data.instructions
+      window.location.reload()
     },
     handleFormChange(e) {
       this[e.target.name] = e.target.value
@@ -105,16 +107,6 @@ export default {
                     password: 'recipe'
                 }
             })
-      console.log(this.recipe_ingredients)
-      console.log(this.recipe_ingredients[index].recipe_id)
-      console.log(this.recipe_ingredients[index].ingredient_id)
-      console.log(this.recipe_ingredients[index].name)
-      console.log(this.new_quantity)
-      console.log(this.new_unit)
-      console.log(id)
-      console.log(res)
-      // TO DO
-      // access recipe_ingredients here
       this.recipe_ingredients.quantity = res.data.quantity
       this.recipe_ingredients.unit = res.data.unit
       
