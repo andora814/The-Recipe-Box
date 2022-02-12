@@ -3,8 +3,8 @@
     <router-link to="/" name="Home" class="nav-btn">Home</router-link>
     <router-link to="/recipebox" class="nav-btn">Recipe Box</router-link>
     <router-link to="/addrecipe" class="nav-btn">Add a Recipe</router-link>
+    <router-link to="/pantry" class="nav-btn">Pantry</router-link>
     <router-link to="/about" class="nav-btn">About</router-link>
-    <router-link to="/apiplayground" class="nav-btn">API Playground</router-link>
   </nav>
 </template>
 

@@ -26,9 +26,9 @@
                         <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleFormChange" class="ingredient" :value="ingredient"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity" :value="quantity"/>
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit" :value="unit"/>
-                        <button @click="addIngredient">+</button>
+                        <button @click="addIngredient">Add ingredient to recipebox</button>
                     </div>
-                    <button @click="selectRecipe(new_recipe.id)">Add recipe card!</button>
+                    <button @click="selectRecipe(new_recipe.id)">Add to Recipe Box</button>
             </div>
         </div>
 

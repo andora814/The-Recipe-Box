@@ -22,7 +22,7 @@ import axios from 'axios'
 
 // const API_KEY = process.env.VUE_APP_SPOONACULAR_KEY;
 export default {
-    name: 'APIPlayground',
+    name: 'Pantry',
     components: {
 
     },
@@ -59,6 +59,7 @@ export default {
                 }
             })
             this.show_food_search=false
+            window.location.reload()
         },
         async GetAllFood() {
             const response = await axios.get('http://localhost:8000/ingredients/'
