@@ -1,8 +1,10 @@
 <template>
    <div class="body">
-    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input" autocomplete="off"/>
-    <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
-    <button @click="clearSearch">Clear</button>
+    <div class="search-container">
+        <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input" autocomplete="off"/>
+        <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
+        <button @click="clearSearch">Clear</button>
+    </div>
     <div v-if="no_results">There are currently no recipes that include that ingredient.</div>
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
@@ -101,12 +103,34 @@ export default {
 }
 
 .body {
-    background-color: white;
+    background-color: #03195a;
+
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-blend-mode: screen;
+    background-size: cover;
+    padding: 10px;
 }
 input {
     height: 30px;
     width: 300px;
     margin: 10px;
     outline: none;
+}
+.search-container {
+    display: flex;
+}
+button {
+    height: 30px;
+    margin: 10px;
+    outline-style: solid;
+    outline-color: white;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+button:hover {
+    background-color: white;
+    color: #03195a;
 }
 </style>

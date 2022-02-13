@@ -56,7 +56,7 @@ export default {
 }
 
 .image  {
-    width: 250px;
+  width: 250px;
     height: 125px
   }
 
@@ -67,29 +67,31 @@ export default {
 .recipe_container {
   width: 250px;
   margin-bottom: 10px;
-  /* background-color: #0349b7; */
-  background-image: url('https://i.imgur.com/pupEQVs.png');
-  border-radius: 10px;
-  color: white;
   cursor: pointer;
+  background-color: white;
+  color: #017754
 }
 
 .recipe_container:hover {
+  /* background-image: url('https://i.imgur.com/pupEQVs.png'); */
+  border-style: solid;
+  border-color: #f4aa09;
+
+  /* color: #f4aa09; */
   transform: scale(1.025);
 }
 
 .delBtn {
   width: 100%;
-  background-image: url('https://i.imgur.com/pupEQVs.png');
+  /* background-image: url('https://i.imgur.com/pupEQVs.png'); */
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
-  border-radius: 0 0 7px 7px
 }
 
 .delBtn:hover {
-  /* background-color: #f4aa09; */
-  color: #f4aa09;
+  background-color: #f4aa09;
+  color: #03195a;
   font-weight: bolder;
 }
 

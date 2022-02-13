@@ -1,33 +1,34 @@
 <template>
   <div class="recipe-content">
-    <h3>{{ recipe_details.title }}</h3>
+    <h2>{{ recipe_details.title }}</h2>
     <img :src="recipe_details.image" class="image"/>
     <div>Ready in {{ recipe_details.ready_in_minutes }} minutes</div>
     <div>Serves {{ recipe_details.servings }}</div>
+    
     <div>{{ recipe_details.summary }}</div>
     <div>Ingredient List: 
       <div v-if="show_ingredients">
         <div v-for="ingredient in recipe_ingredients" :key="ingredient.id">
           {{ ingredient.quantity}} {{ingredient.unit}} of {{ ingredient.name }}
         </div>
-        <button @click="editIngredientList">Edit Ingredients</button>
+        <button @click="editIngredientList">Edit</button>
       </div>
       <div v-if="edit_ingredients">
         <div v-for="(ingredient, index) in recipe_ingredients" :key="ingredient.id">
           <input v-on:input="handleFormChange" :value="ingredient.quantity" v-bind:index="index" name="new_quantity"/> <input v-on:input="handleFormChange" :value="ingredient.unit" name="new_unit"/> of {{ ingredient.name }} 
           <button @click="handleEdit(ingredient.id, index)">Save</button>
         </div>
-        <button @click="saveIngredientList">Save Ingredients</button>
+        <button @click="saveIngredientList">Save</button>
       </div>
     </div>
     <div>Instructions: 
       <div v-if="show_instructions">
         {{ recipe_details.instructions }}
-        <button @click="editInstructions">Edit Instructions</button>
+        <button @click="editInstructions">Edit</button>
       </div>
       <div v-if="edit_instructions">
         <input v-on:input="handleFormChange" name="new_instructions" :value="recipe_details.instructions" /> 
-        <button @click="saveInstructions(recipe_details.id)">Save Instructions</button>
+        <button @click="saveInstructions(recipe_details.id)">Save</button>
       </div>
     </div>
 
@@ -119,5 +120,8 @@ export default {
   .image  {
     width: 500px;
     height: 250px
+  }
+  .recipe-content {
+    
   }
 </style>
