@@ -1,6 +1,6 @@
 <template>
    <div class="body">
-    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input"/>
+    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input" autocomplete="off"/>
     <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
     <button @click="clearSearch">Clear</button>
     <div v-if="no_results">There are currently no recipes that include that ingredient.</div>
@@ -101,6 +101,12 @@ export default {
 }
 
 .body {
-    background-color: #0767ca;
+    background-color: white;
+}
+input {
+    height: 30px;
+    width: 300px;
+    margin: 10px;
+    outline: none;
 }
 </style>

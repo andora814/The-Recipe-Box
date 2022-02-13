@@ -67,7 +67,8 @@ export default {
 .recipe_container {
   width: 250px;
   margin-bottom: 10px;
-  background-color: green;
+  /* background-color: #0349b7; */
+  background-image: url('https://i.imgur.com/pupEQVs.png');
   border-radius: 10px;
   color: white;
   cursor: pointer;
@@ -79,7 +80,7 @@ export default {
 
 .delBtn {
   width: 100%;
-  background-color: green;
+  background-image: url('https://i.imgur.com/pupEQVs.png');
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
@@ -87,9 +88,9 @@ export default {
 }
 
 .delBtn:hover {
-  background-color: #f4aa09;
-  color: white
+  /* background-color: #f4aa09; */
+  color: #f4aa09;
+  font-weight: bolder;
 }
-
 
 </style>
