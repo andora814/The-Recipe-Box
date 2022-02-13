@@ -28,7 +28,7 @@ export default {
   font-weight: bolder;
 }
 .nav-btn {
-  color: #017754;
+  color: white;
   font-size: 25px;
 }
 nav {
@@ -36,7 +36,7 @@ nav {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
+  background-color: #017754;
 }
 
 </style>
