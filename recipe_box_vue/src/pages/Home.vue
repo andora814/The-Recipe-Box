@@ -1,52 +1,38 @@
 <template>
     <div class="body">
         <h1>Search your recipe box</h1>
-    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input"/>
+    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field"/>
     <button @click="handleHomePageSearch(search_input)" :disabled="search_disabled">Search</button>
     </div>
 </template>
 
 <script>
-
-import axios from 'axios'
+// import axios from 'axios'
 export default {
     name: 'Home',
     components: {
-
     },
     data: () => ({
-        search_input: '',
-        all_ingredients: []
+        search_input: ''
     }),
     mounted() {
         
     },
     props: {
-
     },
     methods: {
         handleSearchChange(e) {
             this[e.target.name] = e.target.value
         },
         handleHomePageSearch(searched_word) {
-            if(this.all_ingredients.includes(searched_word)) {
-                this.$router.push({
+            this.$router.push({
                 name: `RecipeBox`,
                 params: {
                     searched_word: searched_word
                 }})
-            } else {
-                alert(`There are currently no recipes with ${searched_word} as an ingredient. Select "Recipe Box" from the navigation bar to view all exisiting recipes.`)
-                this.search_input=""
-            }
-        },
-        async GetAllFood() {
-            const response = await axios.get('http://localhost:8000/ingredients/'
-            )
-            this.all_ingredients =response.data.sort()
+        }
         }
     }
-}
 </script>
 
 <style scoped>
@@ -70,4 +56,3 @@ h1 {
     color: white;
 }
 </style>
- 
