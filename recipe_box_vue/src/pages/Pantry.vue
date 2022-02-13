@@ -11,7 +11,7 @@
     <button @click="ExternalFoodSearch(search_word)">Search external API</button>
     <div>
         <div v-for="ingredient in all_ingredients" :key="ingredient.id">
-            {{ ingredient.name }}
+            {{ ingredient }}
         </div>
     </div>
     </div>
@@ -58,9 +58,15 @@ export default {
             window.location.reload()
         },
         async GetAllFood() {
+            let array = []
+            let data =[]
             const response = await axios.get('http://localhost:8000/ingredients/'
             )
-            this.all_ingredients =response.data.sort()
+            data = response.data
+            for(let i=0; i<data.length; i++) {
+                array.push(data[i].name)
+            }
+            this.all_ingredients = array.sort()
         }
     }
 }
