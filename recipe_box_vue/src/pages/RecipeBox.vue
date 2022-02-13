@@ -1,9 +1,9 @@
 <template>
-   <div>
+   <div class="body">
     <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input"/>
     <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
     <button @click="clearSearch">Clear</button>
-    <div v-if="no_results">There are currently no recipes with {{search_input}} as an ingredient.</div>
+    <div v-if="no_results">There are currently no recipes that include that ingredient.</div>
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
             <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
@@ -98,5 +98,9 @@ export default {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.body {
+    background-color: #0767ca;
 }
 </style>

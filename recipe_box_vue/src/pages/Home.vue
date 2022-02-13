@@ -1,8 +1,10 @@
 <template>
     <div class="body">
         <h1>Search your recipe box</h1>
-    <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field"/>
-    <button @click="handleHomePageSearch(search_input)" :disabled="search_disabled">Search</button>
+        <div class="search-container">
+            <input name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" autocomplete="off"/>
+            <button @click="handleHomePageSearch(search_input)" :disabled="search_disabled">🔍</button>
+        </div>
     </div>
 </template>
 
@@ -37,22 +39,35 @@ export default {
 
 <style scoped>
 .body {
-    background-image: url('https://images.unsplash.com/photo-1558818498-28c1e002b655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
+    background-image: url('https://i.imgur.com/AixUJfw.jpg');
     height: 100vh;
-    width: 100vh;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    background-blend-mode: screen;
+    background-size: cover;
+    padding: 10px;
 }
-/* .image  {
-    width: 500px;
-    height: 250px
-}
-.recipe-container-grid {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-} */
 h1 {
     color: white;
+    font-size: 50px;
 }
+button {
+    /* color: white; */
+    font-size: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    height: 30px;
+    outline: none;
+    background-color: transparent;
+    margin: 10px;
+    padding: 0;
+    border: none;
+    background: none;
+}
+input {
+    height: 30px;
+    width: 300px;
+    margin: 10px;
+}
+
 </style>

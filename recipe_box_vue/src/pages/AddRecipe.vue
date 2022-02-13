@@ -23,7 +23,7 @@
                         </li>
                     </ul>
                     <div class="ingredient-section">
-                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleIngredientFormChange" class="ingredient" :value="ingredient"/>
+                        <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleIngredientFormChange" class="ingredient" :value="ingredient" autocomplete="off"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity" :value="quantity"/>
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit" :value="unit"/>
                         <button @click="addIngredient(ingredient)">Add ingredient to recipebox</button>
@@ -180,10 +180,7 @@ export default {
             this.$router.push(`/recipedetails/${id}`)
         },
     }
-
 }
-
-
 </script>
 
 <style scoped>
@@ -219,7 +216,6 @@ export default {
     .title-minutes-servings-section, .ingredient-section {
         display: flex;
     }
-
     .instructions {
         width: 500px;
         height: 200px;
@@ -228,19 +224,19 @@ export default {
     .suggestions {
     cursor: pointer
     }
-
     .suggestions:hover {
         background-color: white;
         border-radius: 5px;
     }
-
     .suggestions-container {
         position: absolute;
         background-color: green;
         border-radius: 0 0px 10px 10px;
-        align-items: center;
+        align-items: left;
         display: flex;
         flex-direction: column;
         width: 200px;
+        top: 173px;
+        left: 43px;
     }
 </style>

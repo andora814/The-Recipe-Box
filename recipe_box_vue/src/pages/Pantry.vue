@@ -9,9 +9,9 @@
                         </div>
                     </div>
                 </div>
-        <button @click="ExternalFoodSearch(search_word)">Add ingredient</button>
+        <button @click="ExternalFoodSearch(search_word)">Search for new ingredient</button>
     </div>
-    <div>
+    <div class="ingredient-list">
         <div v-for="ingredient in all_ingredients" :key="ingredient.id">
             {{ ingredient }}
         </div>
@@ -93,21 +93,23 @@ export default {
     flex-direction: column;
     width: 200px;
     position: absolute;
-    top: 53px;
-    left: 10px;
+    top: 63px;
+    left: 20px;
 }
 
 .search-container {
     display: flex;
     align-items: center;
+    margin: 10px;
 }
 .body {
     align-items: center;
 }
 
-.api-list {
-    position: absolute;
-
+.ingredient-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
+
 
 </style>

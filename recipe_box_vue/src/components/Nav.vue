@@ -24,18 +24,19 @@ export default {
   color: grey;
 }
 .nav-btn:hover {
-  color: white;
+  color: #f4aa09;
   font-weight: bolder;
 }
 .nav-btn {
-  color: white
+  color: #017754;
+  font-size: 25px;
 }
 nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: green;
+  background-color: white;
 }
 
 </style>

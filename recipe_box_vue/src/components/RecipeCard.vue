@@ -87,7 +87,7 @@ export default {
 }
 
 .delBtn:hover {
-  background-color: red;
+  background-color: #f4aa09;
   color: white
 }
 
