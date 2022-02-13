@@ -118,18 +118,14 @@ export default {
         },
         async addIngredient(ingredient) {
             console.log("add ingredient is being called")
-                // need to add logic to say if ingredient is already in database, don't post
             if(this.pantry_item_selected) {
             for (let i=0; i<this.pantry.length; i++) {
                 if(this.pantry[i].name.toLowerCase()==ingredient.toLowerCase()) {
-                console.log("in pantry")
                 this.ingredient_list.push({
                 "ingredient": this.ingredient,
                 "quantity": this.quantity,
                 "unit": this.unit
             })
-            console.log("pre post request console log")
-     
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
                 "ingredient_id": this.pantry[i].id,
@@ -142,11 +138,9 @@ export default {
                     password: 'recipe'
                 }
             })
-            console.log("post post request console log")
             this.ingredient=""
             this.quantity=""
             this.unit=""
-            console.log("end of first if statement console log")
             } else { 
             console.log("first else")}}
             } else { 
@@ -163,8 +157,7 @@ export default {
                     password: 'recipe'
                 }
             })
-            this.new_ingredient=ingredient_response.data
-                
+            this.new_ingredient=ingredient_response.data   
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
                 "ingredient_id": this.new_ingredient.id,
