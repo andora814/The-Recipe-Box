@@ -128,10 +128,12 @@ export default {
                 "quantity": this.quantity,
                 "unit": this.unit
             })
+            console.log("pre post request console log")
+     
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
                 "ingredient_id": this.pantry[i].id,
-                "name": this.new_ingredient.name,
+                "name": this.pantry[i].name,
                 "quantity": this.quantity,
                 "unit": this.unit,
             }, {
@@ -140,10 +142,11 @@ export default {
                     password: 'recipe'
                 }
             })
+            console.log("post post request console log")
             this.ingredient=""
             this.quantity=""
             this.unit=""
-
+            console.log("end of first if statement console log")
             } else { 
             console.log("first else")}}
             } else { 
