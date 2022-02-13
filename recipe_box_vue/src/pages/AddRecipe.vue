@@ -26,7 +26,7 @@
                         <input placeholder="Ingredient" name="ingredient" type="ingredient" v-on:input="handleIngredientFormChange" class="ingredient" :value="ingredient"/>
                         <input placeholder="Quantity" name="quantity" type="quantity" v-on:input="handleFormChange" class="quantity" :value="quantity"/>
                         <input placeholder="Unit" name="unit" type="unit" v-on:input="handleFormChange" class="unit" :value="unit"/>
-                        <button @click="addIngredient">Add ingredient to recipebox</button>
+                        <button @click="addIngredient(ingredient)">Add ingredient to recipebox</button>
                     </div>
                     <div v-if="show_pantry_search" class="suggestions-container">
                         <div v-for="pantry_item in pantry" :key="pantry_item.id" class="suggestions">
@@ -63,13 +63,14 @@ export default {
         ingredient_list: [],
         pantry: [],
         show_pantry_search: false,
+        filtered_pantry: [],
+        panty_item_selected: 0
     }),
     methods: {
         handleFormChange(e) {
             this[e.target.name] = e.target.value
         },
         handleIngredientFormChange(e) {
-            console.log("handle ingredient form change is being called")
             this[e.target.name] = e.target.value
             if(e.target.value.length > 3) {
                 this.PantrySearch(this.ingredient)
@@ -77,14 +78,23 @@ export default {
         },
         async PantrySearch(keyword) {
             console.log(keyword)
+            let array = []
             this.show_pantry_search = true
             const response = await axios.get('http://localhost:8000/ingredients/')
             this.pantry = response.data
-            console.log(this.pantry)
+            for (let i=0; i<this.pantry.length; i++) {
+                    if(this.pantry[i].name.toLowerCase().includes(keyword.toLowerCase())) {
+                        array.push(this.pantry[i])
+                }
+                }
+            this.filtered_pantry = array
+            this.pantry = this.filtered_pantry
+            // this.search_input=''
         },
         SelectPantryItem(pantry_item) {
             this.ingredient = pantry_item
             this.show_pantry_search=false
+            this.pantry_item_selected=true
         },
         async handleSubmit(e) {
             e.preventDefault()
@@ -106,7 +116,37 @@ export default {
             this.show_recipe = false
             this.show_ingredients = true
         },
-        async addIngredient() {
+        async addIngredient(ingredient) {
+            console.log("add ingredient is being called")
+                // need to add logic to say if ingredient is already in database, don't post
+            if(this.pantry_item_selected) {
+            for (let i=0; i<this.pantry.length; i++) {
+                if(this.pantry[i].name.toLowerCase()==ingredient.toLowerCase()) {
+                console.log("in pantry")
+                this.ingredient_list.push({
+                "ingredient": this.ingredient,
+                "quantity": this.quantity,
+                "unit": this.unit
+            })
+            await axios.post(`http://localhost:8000/recipeingredients/`, {
+                "recipe_id": this.new_recipe.id,
+                "ingredient_id": this.pantry[i].id,
+                "name": this.new_ingredient.name,
+                "quantity": this.quantity,
+                "unit": this.unit,
+            }, {
+                auth: {
+                    username: 'recipeboxuser',
+                    password: 'recipe'
+                }
+            })
+            this.ingredient=""
+            this.quantity=""
+            this.unit=""
+
+            } else { 
+            console.log("first else")}}
+            } else { 
             this.ingredient_list.push({
                 "ingredient": this.ingredient,
                 "quantity": this.quantity,
@@ -121,7 +161,7 @@ export default {
                 }
             })
             this.new_ingredient=ingredient_response.data
-
+                
             await axios.post(`http://localhost:8000/recipeingredients/`, {
                 "recipe_id": this.new_recipe.id,
                 "ingredient_id": this.new_ingredient.id,
@@ -137,13 +177,15 @@ export default {
             this.ingredient=""
             this.quantity=""
             this.unit=""
+            }
+            
         },
         selectRecipe(id) {
             this.$router.push(`/recipedetails/${id}`)
         },
     }
-}
 
+}
 
 
 </script>
