@@ -3,6 +3,7 @@
     <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input"/>
     <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
     <button @click="clearSearch">Clear</button>
+    <div v-if="no_results">There are currently no recipes with {{search_input}} as an ingredient.</div>
     <div class="recipe-container-grid">
         <div v-for="recipe in recipe_array" :key="recipe.id">
             <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
@@ -27,7 +28,8 @@ export default {
         filtered_recipes: [],
         search_input: '',
         search_disabled: false,
-        original_recipe_array: []
+        original_recipe_array: [],
+        no_results: false
     }),
     mounted() {
         this.getRecipes()
@@ -66,6 +68,7 @@ export default {
                     }
                 }
                 }
+            if(array.length==0) {this.no_results=true} else {this.no_results=false}
             this.filtered_recipes = array
             this.recipe_array = this.filtered_recipes
             this.search_input=''
@@ -78,14 +81,10 @@ export default {
             this.search_disabled = false
             this.recipe_array = this.original_recipe_array
             this.filtered_recipes = []
+            this.no_results = false
         }
         }
-    }
-            // this.filtered_recipes = this.recipe_array.filter(recipe => recipe.title.includes(this.search_input));
-            // TO DO:
-            // Search regardless of capitalization
-            // search title AND ingredients?
-    
+    }    
 
 </script>
 
