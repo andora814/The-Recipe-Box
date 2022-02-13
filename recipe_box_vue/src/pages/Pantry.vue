@@ -1,20 +1,22 @@
 <template>
+<div class="body">
     <div class="search-container">
-    <input placeholder="Search external API" name="search_word" type="food_search" v-on:input="handleFormChange" class="food-search"/>
-            <div>
-                <div v-if="show_food_search" class="suggestions-container">
-                    <div v-for="food in food_search" :key="food.id" class="suggestions">
-                        <div @click="SelectFood(food.name)"> {{ food.name }} </div>
+        <input placeholder="🔍" name="search_word" type="food_search" v-on:input="handleFormChange" class="food-search"/>
+                <div class="search-container">
+                    <div v-if="show_food_search" class="suggestions-container">
+                        <div v-for="food in food_search" :key="food.id" class="suggestions">
+                            <div @click="SelectFood(food.name)"> {{ food.name }} </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-    <button @click="ExternalFoodSearch(search_word)">Search external API</button>
+        <button @click="ExternalFoodSearch(search_word)">Add ingredient</button>
+    </div>
     <div>
         <div v-for="ingredient in all_ingredients" :key="ingredient.id">
             {{ ingredient }}
         </div>
     </div>
-    </div>
+</div>
 </template>
 
 <script>
@@ -74,7 +76,7 @@ export default {
 
 <style scoped>
 .suggestions {
-    cursor: pointer
+    cursor: pointer;
 }
 
 .suggestions:hover {
@@ -90,6 +92,22 @@ export default {
     display: flex;
     flex-direction: column;
     width: 200px;
+    position: absolute;
+    top: 53px;
+    left: 10px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+.body {
+    align-items: center;
+}
+
+.api-list {
+    position: absolute;
+
 }
 
 </style>
