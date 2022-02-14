@@ -42,7 +42,7 @@ export default {
         },
         async ExternalFoodSearch (keyword) { 
             this.show_food_search = true
-            const res = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${keyword}&number=20&sort=calories&sortDirection=desc&apiKey=9e2e99bbc2e8487baf824d1acd1621e9`);
+            const res = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${keyword}&number=30&sort=calories&sortDirection=desc&apiKey=9e2e99bbc2e8487baf824d1acd1621e9`);
             this.food_search = res.data.results
         },
         async SelectFood (food_name) {
