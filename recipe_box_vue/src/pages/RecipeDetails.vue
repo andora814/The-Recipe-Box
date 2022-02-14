@@ -31,7 +31,7 @@
         <button @click="editInstructions">Edit</button>
       </div>
       <div v-if="edit_instructions">
-        <input v-on:input="handleFormChange" name="new_instructions" :value="recipe_details.instructions" /> 
+        <input v-on:input="handleFormChange" name="new_instructions" :value="recipe_details.instructions" class="new-instructions"/> 
         <button @click="saveInstructions(recipe_details.id)">Save</button>
       </div>
     </div>
@@ -143,6 +143,11 @@ export default {
   .title-and-ready-in-and-serves {
     display: flex;
     flex-direction: column;
+  }
+  .new-instructions {
+    width: 500px;
+    height: 200px;
+    margin: 10px; 
   }
 
 </style>

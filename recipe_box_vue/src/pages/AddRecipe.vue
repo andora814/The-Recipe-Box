@@ -55,7 +55,7 @@ export default {
         summary: '',
         instructions: '',
         ingredient: '',
-        quantity: 0,
+        quantity: '',
         unit: '',
         new_recipe: {},
         new_ingredient: {},

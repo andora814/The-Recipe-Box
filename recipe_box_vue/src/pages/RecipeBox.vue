@@ -65,7 +65,7 @@ export default {
             if(search_input.length>0) {
             for (let i=0; i<this.recipe_array.length; i++) {
                 for(let j=0; j<this.recipe_array[i].recipe_ingredients.length; j++) {
-                    if(this.recipe_array[i].recipe_ingredients[j].name.toLowerCase().includes(search_input.toLowerCase())) {
+                    if(this.recipe_array[i].recipe_ingredients[j].name.toLowerCase().includes(search_input.toLowerCase()) && !array.includes(this.recipe_array[i])) {
                         array.push(this.recipe_array[i])
                     }
                 }
