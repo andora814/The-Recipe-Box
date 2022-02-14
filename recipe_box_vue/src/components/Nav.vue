@@ -36,6 +36,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   background-color: #017754;
+  margin: 0px;
 }
 
 </style>
