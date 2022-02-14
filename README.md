@@ -33,7 +33,7 @@ My first step was to create a wire frame, which allowed me to visualize what my 
 #### 
 ![Home Page](https://i.imgur.com/dNqaho8.png)
 ###
-![Recipe Box Page](https://i.imgur.com/tQjTdzz.png)
+![Recipe Box Page](https://i.imgur.com/89v9A6B.png)
 ###
 ![Recipe Card](https://i.imgur.com/Z4oaw5h.png)
 ***
@@ -48,3 +48,4 @@ My first step was to create a wire frame, which allowed me to visualize what my 
 #### Ingredient API [Spoonacular](https://spoonacular.com/food-api)
 #### Recipes & Images: [Simply Recipes](https://www.simplyrecipes.com/)
 #### Background Image: [Unsplash Search](https://images.unsplash.com/photo-1541795795328-f073b763494e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)
+#### Index Card Styling: [CodePen](https://codepen.io/teddyzetterlund/pen/YPjEzP)
