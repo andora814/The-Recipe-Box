@@ -115,6 +115,7 @@ export default {
 .ingredient-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    font-size: 25px;
 }
 button {
     height: 30px;
