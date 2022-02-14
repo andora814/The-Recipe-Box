@@ -22,7 +22,6 @@
 <script>
 import axios from 'axios'
 
-// const API_KEY = process.env.VUE_APP_SPOONACULAR_KEY;
 export default {
     name: 'Pantry',
     components: {
@@ -125,6 +124,10 @@ button {
     background-color: transparent;
     border: none;
     color: white;
+}
+button:hover {
+    background-color: white;
+    color: #03195a;
 }
 input {
     height: 30px;

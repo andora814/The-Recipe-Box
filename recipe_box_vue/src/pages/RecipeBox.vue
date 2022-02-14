@@ -1,5 +1,5 @@
 <template>
-   <div class="body">
+<div class="body">
     <div class="search-container">
         <input placeholder="Enter ingredient" name="search_input" type="text" v-on:input="handleSearchChange" class="title-field" :value="search_input" autocomplete="off"/>
         <button @click="filterRecipes(search_input)" :disabled="search_disabled">Search</button>
@@ -11,7 +11,7 @@
             <RecipeCard v-bind:recipe="recipe" @handleDelete="handleDelete" @click="selectRecipe(recipe.id)"/>
         </div>
     </div>
-    </div>
+</div>
 </template>
 
 <script>

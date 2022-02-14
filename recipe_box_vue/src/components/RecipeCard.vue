@@ -56,7 +56,6 @@ export default {
 }
 
 .image  {
-  /* width: 250px; */
   height: 125px
   }
 
@@ -66,6 +65,7 @@ export default {
 
 .recipe_container {
   width: 250px;
+  height: 260px;
   margin-bottom: 10px;
   cursor: pointer;
   background-color: white;
@@ -73,17 +73,13 @@ export default {
 }
 
 .recipe_container:hover {
-  /* background-image: url('https://i.imgur.com/pupEQVs.png'); */
   border-style: solid;
   border-color: #f4aa09;
-
-  /* color: #f4aa09; */
   transform: scale(1.025);
 }
 
 .delBtn {
   width: 100%;
-  /* background-image: url('https://i.imgur.com/pupEQVs.png'); */
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;

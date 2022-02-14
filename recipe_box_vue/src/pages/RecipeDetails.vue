@@ -9,7 +9,7 @@
       <img :src="recipe_details.image" class="image"/>
     </div>
     
-    <div><strong>Description: </strong>{{ recipe_details.summary }}</div>
+    <div><strong>Notes: </strong>{{ recipe_details.summary }}</div>
     <div><strong>Ingredient List: </strong>
       <div v-if="show_ingredients">
         <div v-for="ingredient in recipe_ingredients" :key="ingredient.id">
@@ -122,7 +122,6 @@ export default {
 
 <style scoped>
   .image  {
-    /* width: 500px; */
     height: 250px
   }
   .image-and-title {

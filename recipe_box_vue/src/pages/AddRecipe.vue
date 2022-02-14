@@ -10,7 +10,7 @@
                         <input placeholder="# of Servings" name="servings" type="servings" v-on:input="handleFormChange" class="integer-field" autocomplete="off"/>
                     </div>
                     <input placeholder="Image URL" name="image" type="image_url" v-on:input="handleFormChange" autocomplete="off"/>
-                    <input placeholder="Summary" name="summary" type="summary" v-on:input="handleFormChange" class="summary" autocomplete="off"/>
+                    <input placeholder="Notes" name="summary" type="summary" v-on:input="handleFormChange" class="summary" autocomplete="off"/>
                     <input placeholder="Instructions" name="instructions" type="instructions" v-on:input="handleFormChange" class="instructions" autocomplete="off"/>
                     <button type="submit">Next</button>
                 </div>
@@ -78,7 +78,6 @@ export default {
             }
         },
         async PantrySearch(keyword) {
-            console.log(keyword)
             let array = []
             this.show_pantry_search = true
             const response = await axios.get('http://localhost:8000/ingredients/')
@@ -117,7 +116,6 @@ export default {
             this.show_ingredients = true
         },
         async addIngredient(ingredient) {
-            console.log("add ingredient is being called")
             if(this.pantry_item_selected) {
             for (let i=0; i<this.pantry.length; i++) {
                 if(this.pantry[i].name.toLowerCase()==ingredient.toLowerCase()) {
@@ -142,7 +140,7 @@ export default {
             this.quantity=""
             this.unit=""
             } else { 
-            console.log("first else")}}
+            console.log("")}}
             } else { 
             this.ingredient_list.push({
                 "ingredient": this.ingredient,

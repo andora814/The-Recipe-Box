@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 export default {
     name: 'Home',
     components: {
@@ -51,7 +50,6 @@ h1 {
     font-size: 50px;
 }
 button {
-    /* color: white; */
     font-size: 30px;
     cursor: pointer;
     text-decoration: none;
