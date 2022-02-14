@@ -64,18 +64,24 @@ export default {
 }
 
 .recipe_container {
-  width: 250px;
-  height: 260px;
-  margin-bottom: 10px;
   cursor: pointer;
   background-color: white;
-  color: #017754
+  background-image:
+    linear-gradient(180deg, white 3rem, #f4aa09 calc(3rem), #f4aa09 calc(3rem + 2px), transparent 1px),
+    repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));
+  box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+  height: 14rem;
+  width: 400px;
+  color: #017754;
+  margin: 10px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .recipe_container:hover {
   border-style: solid;
   border-color: #f4aa09;
-  transform: scale(1.025);
 }
 
 .delBtn {
