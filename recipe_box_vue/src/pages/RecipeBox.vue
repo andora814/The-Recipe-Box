@@ -104,7 +104,7 @@ export default {
 
 .body {
     background-color: #03195a;
-
+    color: white;
     height: 100vh;
     background-repeat: no-repeat;
     background-blend-mode: screen;

@@ -56,8 +56,8 @@ export default {
 }
 
 .image  {
-  width: 250px;
-    height: 125px
+  /* width: 250px; */
+  height: 125px
   }
 
 .blur {

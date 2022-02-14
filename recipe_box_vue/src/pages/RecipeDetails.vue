@@ -1,12 +1,16 @@
 <template>
   <div class="recipe-content">
-    <h2>{{ recipe_details.title }}</h2>
-    <img :src="recipe_details.image" class="image"/>
-    <div>Ready in {{ recipe_details.ready_in_minutes }} minutes</div>
-    <div>Serves {{ recipe_details.servings }}</div>
+    <div class="image-and-title">
+      <div class="title-and-ready-in-and-serves">
+        <h2>{{ recipe_details.title }}</h2>
+          <div><strong>Ready in </strong>{{ recipe_details.ready_in_minutes }} minutes</div>
+          <div><strong>Serves </strong>{{ recipe_details.servings }}</div>
+      </div>
+      <img :src="recipe_details.image" class="image"/>
+    </div>
     
-    <div>{{ recipe_details.summary }}</div>
-    <div>Ingredient List: 
+    <div><strong>Description: </strong>{{ recipe_details.summary }}</div>
+    <div><strong>Ingredient List: </strong>
       <div v-if="show_ingredients">
         <div v-for="ingredient in recipe_ingredients" :key="ingredient.id">
           {{ ingredient.quantity}} {{ingredient.unit}} of {{ ingredient.name }}
@@ -21,7 +25,7 @@
         <button @click="saveIngredientList">Save</button>
       </div>
     </div>
-    <div>Instructions: 
+    <div><strong>Instructions: </strong>
       <div v-if="show_instructions">
         {{ recipe_details.instructions }}
         <button @click="editInstructions">Edit</button>
@@ -118,10 +122,28 @@ export default {
 
 <style scoped>
   .image  {
-    width: 500px;
+    /* width: 500px; */
     height: 250px
   }
-  .recipe-content {
-    
+  .image-and-title {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    justify-content: space-around;
   }
+  .recipe-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: #03195a
+  }
+  .ready-in-and-serves {
+    display: flex;
+    justify-content: space-around;
+  }
+  .title-and-ready-in-and-serves {
+    display: flex;
+    flex-direction: column;
+  }
+
 </style>

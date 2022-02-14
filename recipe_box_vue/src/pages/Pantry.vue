@@ -1,7 +1,7 @@
 <template>
 <div class="body">
     <div class="search-container">
-        <input placeholder="🔍" name="search_word" type="food_search" v-on:input="handleFormChange" class="food-search"/>
+        <input placeholder="Enter ingredient" name="search_word" type="food_search" v-on:input="handleFormChange" class="food-search"/>
                 <div class="search-container">
                     <div v-if="show_food_search" class="suggestions-container">
                         <div v-for="food in food_search" :key="food.id" class="suggestions">
@@ -45,7 +45,6 @@ export default {
             this.show_food_search = true
             const res = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${keyword}&number=20&sort=calories&sortDirection=desc&apiKey=9e2e99bbc2e8487baf824d1acd1621e9`);
             this.food_search = res.data.results
-            console.log(this.food_search)
         },
         async SelectFood (food_name) {
             await axios.post(`http://localhost:8000/ingredients/`, {
@@ -80,21 +79,21 @@ export default {
 }
 
 .suggestions:hover {
-    background-color: white;
+    background-color: #f4aa09;
     border-radius: 5px;
 }
 
 .suggestions-container {
     position: absolute;
-    background-color: green;
+    background-color: #017754;
     border-radius: 0 0px 10px 10px;
     align-items: center;
     display: flex;
     flex-direction: column;
     width: 200px;
     position: absolute;
-    top: 63px;
-    left: 20px;
+    top: 110px;
+    left: 30px;
 }
 
 .search-container {
@@ -104,12 +103,32 @@ export default {
 }
 .body {
     align-items: center;
+    background-color: #03195a;
+    color: white;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-blend-mode: screen;
+    background-size: cover;
+    padding: 10px;
 }
 
 .ingredient-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
-
+button {
+    height: 30px;
+    margin: 10px;
+    outline-style: solid;
+    outline-color: white;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+input {
+    height: 30px;
+    width: 300px;
+    margin: 10px;
+    outline: none;
+}
 </style>
