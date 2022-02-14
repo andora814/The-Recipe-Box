@@ -5,9 +5,9 @@
 ***
 ### ***Description***
 ####
-As a chef, my husband is often creating new recipes but never writing them down. We then struggle to remember what delicious meals we ate in the past, and don't do a great job of planning for the week ahead.
+As a chef, my husband is often creating new recipes but never writing them down. After a busy day at work, creating a new recipe does not sound appealing, and we struggle to remember what he has cooked in the past. The Recipe Box will allow home cooks and chefs to enter their recipe data and reference them in the future.
 
-This site will allow home cooks and chefs to enter their recipe data and reference them in the future. An external API will also be used to view others' recipes and add to the user's own personal recipe box. This application will include a Vue frontend, a Postgres database, and a Python Django backend.
+This site will allow home cooks and chefs to enter their recipe data and reference them in the future. An external API is used to access ingredients and add to the user's pantry. This application includes a Vue frontend, a Postgres database, and a Python Django backend.
 
 ***
 ### ***Technologies***
@@ -36,8 +36,10 @@ My first step as to create a wire frame, which allowed me to visualize what my a
 ![Recipe Box Page](TBD)
 ***
 ### ***Future Updates***
-- [ ] External API for ingredients
+- [ ] User authentication
+- [ ] Deply on Heroku
 - [ ] External API for recipes
 - [ ] User authentication
 - [ ] Calendar for historical reference and future planning
+- [ ] Adjust formatting of instructions and ingredients to improve user experience
 ***
