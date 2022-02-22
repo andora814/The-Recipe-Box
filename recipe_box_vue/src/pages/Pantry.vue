@@ -21,7 +21,7 @@
 
 <script>
 import axios from 'axios'
-const API_KEY = process.env.VUE_APP_API_KEY;
+// const API_KEY = process.env.VUE_APP_API_KEY;
 export default {
     name: 'Pantry',
     components: {
@@ -42,7 +42,7 @@ export default {
         },
         async ExternalFoodSearch (keyword) { 
             this.show_food_search = true
-            const res = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${keyword}&number=30&sort=calories&sortDirection=desc&apiKey=${API_KEY}`);
+            const res = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${keyword}&number=30&sort=calories&sortDirection=desc&apiKey=9e2e99bbc2e8487baf824d1acd1621e9`);
             this.food_search = res.data.results
         },
         async SelectFood (food_name) {
